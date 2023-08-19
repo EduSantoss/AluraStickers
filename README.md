@@ -1,9 +1,10 @@
 <h1 align="center"> Alura Stickers </h1>
 
- Proposta de projeto construído em Java em uma imersão da Alura
+<p align="center"> Proposta de projeto construído em Java em uma imersão da Alura. </p>
 
  <h2 align="center"> Funções </h2>
 
- - Utilizar a API proposta (imDb filmes) e extrair as informações de filmes de lá.
+ - Utilizar as APIs propostas (imDb filmes, Nasa) e extrair as informações de filmes de lá.
  - Gerar figurinhas nas dimensões corretas a partir das imagens extraídas.
- - Exibir uma descrição dos filmes.
+ - Desenhar na imagem uma descrição.
+
