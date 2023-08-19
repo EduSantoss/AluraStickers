@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -18,20 +21,30 @@ public class App {
        HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
        String body = response.body();
-       //System.out.println(body);
 
         // pegar os dados que interessam dessa string, (titulo, poster, classificaçao/rating) extrair os dados/ parsear os dados
         // terá que ser feito por expressoes regulares, mas poderia usar alguma lib como jackson
         JsonParser parser = new JsonParser(); 
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
        
+        var diretorio = new File("figurinhas/");
+        diretorio.mkdir();
 
         // exibir e manipular os dados 
         for (Map<String,String> filme : listaDeFilmes) {
-            System.out.println(filme.get("title"));
-            System.out.println(filme.get("image"));
+
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
+
+            InputStream inputStream = new URL(urlImagem).openStream();
+            String nomeArquivo = "figurinhas/" + titulo + ".png";
+
+            GeradorFigurinhas gerador = new GeradorFigurinhas();
+            gerador.cria(inputStream, nomeArquivo);
+
+            System.out.println(titulo);
             System.out.println(filme.get("imDbRating"));
-            System.out.println("--------------");
+            System.out.println("---------------------------");
         }
 
     }
